@@ -225,6 +225,37 @@ button:active {
     min-height: 0;
 }
 
+.command-bar {
+    padding: 6px 0 10px;
+}
+
+.command-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.command-btn {
+    appearance: none;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.command-btn:hover {
+    border-color: #2563eb;
+    color: #93c5fd;
+}
+
+.command-btn:active {
+    background: #111827;
+    border-color: #1d4ed8;
+}
+
 .io-block {
     flex: 1;
     display: flex;

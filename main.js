@@ -20,6 +20,7 @@
     const memoryFormatToggle = document.getElementById("memory-format-toggle");
     const editorTabsContainer = document.getElementById("editor-tabs");
     const addTabBtn = document.getElementById("add-tab-btn");
+    const commandButtonsContainer = document.getElementById("command-buttons");
 
     let tabs = [
         { name: "main.bf", code: "" },
@@ -572,6 +573,31 @@
 
     if (addTabBtn) {
         addTabBtn.addEventListener("click", addTab);
+    }
+
+    function insertCommand(cmd) {
+        if (codeEditor) {
+            codeEditor.replaceSelection(cmd);
+            codeEditor.focus();
+        } else if (codeTextarea) {
+            const start = codeTextarea.selectionStart || 0;
+            const end = codeTextarea.selectionEnd || 0;
+            const value = codeTextarea.value || "";
+            codeTextarea.value = value.slice(0, start) + cmd + value.slice(end);
+            const cursor = start + cmd.length;
+            codeTextarea.selectionStart = codeTextarea.selectionEnd = cursor;
+            codeTextarea.focus();
+        }
+    }
+
+    if (commandButtonsContainer) {
+        commandButtonsContainer.querySelectorAll(".command-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const cmd = btn.dataset.cmd || "";
+                if (!cmd) return;
+                insertCommand(cmd);
+            });
+        });
     }
 
     runBtn.addEventListener("click", runContinuously);
